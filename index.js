@@ -6,7 +6,7 @@ const  bodyParser  =  require('body-parser');
 const  morgan  =  require('morgan');
 const mysql = require('mysql2');
 // const connection = require('./helpers/db.js');
-// const authRouter = require('./routes/auth/auth.js');
+const authRouter = require('./routes/auth/auth.js');
 
 const app = express()
 
@@ -26,7 +26,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended:  false }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname  +  '/public'));
-// app.use('/auth', authRouter);routes
+app.use('/auth', authRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello')
