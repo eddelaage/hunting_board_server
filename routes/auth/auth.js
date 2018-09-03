@@ -28,6 +28,22 @@ Router.post('/signup', function(req, res, next) {
     })
 })
 
+// DELETE USER
+const deleteUserQuery = `DELETE FROM users WHERE id = ?`
+
+Router.delete('/deleteUser/:id', function(req, res, next) {
+  const id = req.params.id
+  console.log(req.body)
+  const values = [id]
+  connection.query(deleteUserQuery, values)
+    .then(result => {
+      res.status(200).json({ flash:  "User has been deleted !" });
+    })
+    .catch(err => {
+      res.status(500).json({ flash:  err.message })
+    })
+})
+
 // UPDATE USER
 const updateUser = `UPDATE users SET email = ?, password = ?, firstName = ?, lastName = ?, birthDate = ?, gender = ? WHERE id = ?`
 
